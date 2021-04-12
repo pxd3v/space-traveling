@@ -1,1 +1,9 @@
-// TODO
+.appContainer {
+  max-width: 920px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 8rem;
+}

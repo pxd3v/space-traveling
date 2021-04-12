@@ -1,1 +1,49 @@
-// TODO
+.post {
+  h2 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  & > p {
+    color: var(--body);
+    margin-bottom: 1.4rem;
+  }
+
+  div {
+    display: flex;
+
+    span + span {
+      margin-left: 1.5rem;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      & > p{
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  span > p {
+    color: var(--info);
+    font-size: 0.75rem;
+  }
+}
+.postsContainer {
+  button {
+    background: var(--background);
+    color: var(--highlight);
+    border: none;
+    font-weight: 600;
+    margin: 4rem 0;
+  }
+
+  ul {
+    list-style: none;
+
+    li + li {
+      margin-top: 3rem;
+    }
+  }
+}
