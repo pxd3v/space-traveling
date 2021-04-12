@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
+import Link from 'next/link';
 
 import { FiUser, FiCalendar } from 'react-icons/fi';
 import { format } from 'date-fns';
@@ -52,31 +53,38 @@ export default function Home({ postsPagination }: HomeProps) {
   }
 
   return (
-    <main className={styles.postsContainer}>
-      <ul>
-        {posts.map(post => (
-          <li key={post.uid} className={styles.post}>
-            <h2>{post.data.title}</h2>
-            <p>{post.data.subtitle}</p>
-            <div>
-              <span>
-                <FiCalendar />
-                <p>{formatDate(post.first_publication_date)}</p>
-              </span>
-              <span>
-                <FiUser />
-                <p>{post.data.author}</p>
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {nextPage && (
-        <button type="button" onClick={onClickLoadMore}>
-          Carregar mais posts
-        </button>
-      )}
-    </main>
+    <>
+      <Header />
+      <main className={styles.postsContainer}>
+        <ul>
+          {posts.map(post => (
+            <li key={post.uid}>
+              <Link href={`/post/${post.uid}`}>
+                <a className={styles.post}>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.subtitle}</p>
+                  <div>
+                    <span>
+                      <FiCalendar />
+                      <p>{formatDate(post.first_publication_date)}</p>
+                    </span>
+                    <span>
+                      <FiUser />
+                      <p>{post.data.author}</p>
+                    </span>
+                  </div>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {nextPage && (
+          <button type="button" onClick={onClickLoadMore}>
+            Carregar mais posts
+          </button>
+        )}
+      </main>
+    </>
   );
 }
 
