@@ -3,8 +3,6 @@ import Prismic from '@prismicio/client';
 import Link from 'next/link';
 
 import { FiUser, FiCalendar } from 'react-icons/fi';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import { useState } from 'react';
 import { getPrismicClient } from '../services/prismic';
 
@@ -12,6 +10,7 @@ import Header from '../components/Header';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import formatDate from '../utils/formatDate';
 
 interface Post {
   uid?: string;
@@ -35,13 +34,6 @@ interface HomeProps {
 export default function Home({ postsPagination }: HomeProps) {
   const [posts, setPosts] = useState(postsPagination.results);
   const [nextPage, setNextPage] = useState(postsPagination.next_page);
-  function formatDate(date: string): string {
-    const castedDate = new Date(date);
-
-    return format(castedDate, 'dd MMM y', {
-      locale: ptBR,
-    });
-  }
 
   async function onClickLoadMore(): Promise<void> {
     if (nextPage) {
@@ -53,9 +45,9 @@ export default function Home({ postsPagination }: HomeProps) {
   }
 
   return (
-    <>
+    <div className={commonStyles.container}>
       <Header />
-      <main className={styles.postsContainer}>
+      <main className={`${styles.postsContainer}`}>
         <ul>
           {posts.map(post => (
             <li key={post.uid}>
@@ -66,7 +58,9 @@ export default function Home({ postsPagination }: HomeProps) {
                   <div>
                     <span>
                       <FiCalendar />
-                      <p>{formatDate(post.first_publication_date)}</p>
+                      <p>
+                        {formatDate(post.first_publication_date, 'dd MMM y')}
+                      </p>
                     </span>
                     <span>
                       <FiUser />
@@ -84,7 +78,7 @@ export default function Home({ postsPagination }: HomeProps) {
           </button>
         )}
       </main>
-    </>
+    </div>
   );
 }
 

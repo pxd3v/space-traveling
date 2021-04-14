@@ -1,1 +1,38 @@
-// TODO
+.postContainer {
+  img {
+    width: 100%;
+  }
+
+  .postSummary {
+    margin-top: 4rem;
+
+    > h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    > div {
+      display: flex;
+      > span {
+        > svg {
+          margin-right: 0.5rem;
+        }
+
+        display: flex;
+      }
+
+      > span + span {
+        margin-left: 1.5rem;
+      }
+    }
+  }
+
+  .postContent {
+    margin-top: 3rem;
+    > h2 {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+}
